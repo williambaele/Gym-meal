@@ -2,9 +2,28 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const groupSchema = new Schema(
+const ingredientSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  quantity: {
+    type: String,
+    required: true,
+  },
+});
+
+const recipeSchema = new Schema(
   {
-    name: {
+    title: {
+      type: String,
+      required: true,
+    },
+    proteinSource: {
+      type: String,
+      required: true,
+    },
+    mealType: {
       type: String,
       required: true,
     },
@@ -12,14 +31,9 @@ const groupSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    members: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    ingredients: [ingredientSchema],
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Group", groupSchema);
+module.exports = mongoose.model("Recipe", recipeSchema);

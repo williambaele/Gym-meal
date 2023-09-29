@@ -1,22 +1,28 @@
 const Recipe = require("../models/recipeModel");
 const mongoose = require("mongoose");
 
-// GET ALL GROUPS
+// GET ALL RECIPES
 const getRecipes = async (req, res) => {
   const recipes = await Recipe.find({}).sort({ createdAt: -1 });
   res.status(200).json(recipes);
 };
 
-// CREATE NEW GROUP
-const createGroup = async (req, res) => {
-  const { name, user_id, groupMembers } = req.body;
+// CREATE NEW RECIPE
+const createRecipe = async (req, res) => {
+  const { title, user_id, ingredients, proteinSource, mealType } = req.body;
   let emptyFields = [];
 
-  if (!name) {
-    emptyFields.push("name");
+  if (!title) {
+    emptyFields.push("title");
   }
-  if (!groupMembers) {
-    emptyFields.push("group members");
+  if (!ingredients) {
+    emptyFields.push("ingredients");
+  }
+  if (!proteinSource) {
+    emptyFields.push("proteinSource");
+  }
+  if (!mealType) {
+    emptyFields.push("mealType");
   }
   if (emptyFields.length > 0) {
     return res
@@ -24,74 +30,82 @@ const createGroup = async (req, res) => {
       .json({ error: "Some information is missing: ", emptyFields });
   }
 
-  const groupData = {
-    name,
+  const recipeData = {
+    title,
     user: user_id,
-    members: groupMembers,
+    ingredients,
+    proteinSource,
+    mealType,
   };
   // ADD DOC TO DB
   try {
-    const group = await Group.create(groupData);
-    res.status(200).json(group);
+    const recipe = await Recipe.create(recipeData);
+    res.status(200).json(recipe);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-// DELETE A GROUP
-const deleteGroup = async (req, res) => {
+// DELETE A RECIPE
+const deleteRecipe = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such group" });
+    return res.status(404).json({ error: "No such recupe" });
   }
 
-  const group = await Group.findOneAndDelete({ _id: id });
+  const recipe = await Recipe.findOneAndDelete({ _id: id });
 
-  if (!group) {
-    return res.status(400).json({ error: "No such group" });
+  if (!recipe) {
+    return res.status(400).json({ error: "No such recipe" });
   }
 
-  res.status(200).json(group);
+  res.status(200).json(recipe);
 };
 
-// GET GROUP
-const getGroup = async (req, res) => {
+// GET RECIPE
+const getRecipe = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "Invalid group ID" });
+    return res.status(404).json({ error: "Invalid recipe ID" });
   }
 
-  const group = await Group.findById(id);
+  const recipe = await Recipe.findById(id);
 
-  if (!group) {
-    return res.status(404).json({ error: "Group not found" });
+  if (!recipe) {
+    return res.status(404).json({ error: "recipe not found" });
   }
 
-  res.status(200).json(group);
+  res.status(200).json(recipe);
 };
 
-// UPDATE A GROUP
-const updateGroup = async (req, res) => {
+// UPDATE A RECIPE
+const updateRecipe = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such group" });
+    return res.status(404).json({ error: "No such recipe" });
   }
 
-  const group = await Group.findOneAndUpdate(
+  const recipe = await Recipe.findOneAndUpdate(
     { _id: id },
     {
       ...req.body,
     }
   );
 
-  if (!group) {
-    return res.status(400).json({ error: "No such group" });
+  if (!recipe) {
+    return res.status(400).json({ error: "No such recipe" });
   }
 
-  res.status(200).json(group);
+  res.status(200).json(grorecipeup);
 };
 
-module.exports = { getGroups, createGroup, getGroup, deleteGroup, updateGroup };
+module.exports = {
+  getRecipes,
+  createRecipe,
+  getRecipe,
+  deleteRecipe,
+  updateRecipe,
+};

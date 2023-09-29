@@ -1,20 +1,20 @@
 const express = require("express");
 const {
-  getGroups,
-  createGroup,
-  getGroup,
-  deleteGroup,
-  updateGroup,
-} = require("../controllers/groupController");
+  getRecipes,
+  createRecipe,
+  getRecipe,
+  deleteRecipe,
+  updateRecipe,
+} = require("../controllers/recipeController");
 const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
-router.post("/", requireAuth, createGroup);
-router.delete("/:id", requireAuth, deleteGroup);
-router.patch("/:id", requireAuth, updateGroup);
+router.post("/", requireAuth, createRecipe);
+router.delete("/:id", requireAuth, deleteRecipe);
+router.patch("/:id", requireAuth, updateRecipe);
 // GET routes don't require auth
-router.get("/", getGroups);
-router.get("/:id", getGroup);
+router.get("/", getRecipes);
+router.get("/:id", getRecipe);
 
 module.exports = router;

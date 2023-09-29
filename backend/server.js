@@ -2,10 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-const taskRoutes = require("./routes/tasks");
-const userRoutes = require("./routes/user");
-const groupRoutes = require("./routes/groups");
-const groupTasksRoutes = require("./routes/groupTasks");
+const userRoutes = require("./routes/users");
+const recipeRoutes = require("./routes/recipes");
 
 // express app
 const app = express();
@@ -19,9 +17,7 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use("/api/grouptasks", groupTasksRoutes);
-app.use("/api/groups", groupRoutes);
-app.use("/api/tasks", taskRoutes);
+app.use("/api/recipes", recipeRoutes);
 app.use("/api/user", userRoutes);
 
 // connect to db
