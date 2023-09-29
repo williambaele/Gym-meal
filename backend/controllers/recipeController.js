@@ -1,10 +1,10 @@
-const Group = require("../models/groupModel");
+const Recipe = require("../models/recipeModel");
 const mongoose = require("mongoose");
 
 // GET ALL GROUPS
-const getGroups = async (req, res) => {
-  const groups = await Group.find({}).sort({ createdAt: -1 });
-  res.status(200).json(groups);
+const getRecipes = async (req, res) => {
+  const recipes = await Recipe.find({}).sort({ createdAt: -1 });
+  res.status(200).json(recipes);
 };
 
 // CREATE NEW GROUP
