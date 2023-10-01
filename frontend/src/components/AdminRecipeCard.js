@@ -1,5 +1,6 @@
 import React from "react";
 import { useRecipesContext } from "../hooks/useRecipesContext";
+import { toast } from "react-toastify";
 
 const AdminRecipeCard = ({ recipe, user }) => {
   //DELETE RECIPE
@@ -19,6 +20,7 @@ const AdminRecipeCard = ({ recipe, user }) => {
 
     if (response.ok) {
       dispatch({ type: "DELETE_RECIPE", payload: { _id: recipeId } });
+      toast("Recipe deleted");
     } else {
       console.log("Error deleting the task.");
     }

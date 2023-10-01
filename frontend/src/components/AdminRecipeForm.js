@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRecipesContext } from "../hooks/useRecipesContext";
+import { toast } from "react-toastify";
 
 const AdminRecipeForm = ({ user, onClose }) => {
   //MAPPED MENUS
@@ -66,6 +67,7 @@ const AdminRecipeForm = ({ user, onClose }) => {
     }
     if (response.ok) {
       dispatch({ type: "CREATE_RECIPE", payload: json });
+      toast("Recipe created");
 
       onClose();
     }

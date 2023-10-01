@@ -30,3 +30,10 @@ input,
 textarea {
   font-family: "Nunito Sans", sans-serif;
 }
+
+/* TOASTER EDIT */
+
+:root {
+  --toastify-color-light: #cdd0cb !important;
+  --toastify-color-progress-light: #7c9473 !important;
+}
