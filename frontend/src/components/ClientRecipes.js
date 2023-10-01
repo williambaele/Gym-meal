@@ -10,10 +10,12 @@ const ClientRecipes = ({ recipes, closeForm }) => {
           Enjoy your meals 😋
         </h1>
       </div>
-      <div className="bg-orange-500 h-4/6">
-        {recipes.map((recipe, index) => (
-          <ClientRecipeCard recipe={recipe} key={index} />
-        ))}
+      <div className="flex items-center justify-center w-full bg-orange-500 h-4/6">
+        <div className="flex flex-col w-full gap-10">
+          {recipes.map((recipe, index) => (
+            <ClientRecipeCard recipe={recipe} key={index} />
+          ))}
+        </div>
       </div>
       <div className="flex items-center h-1/6">
         <button
