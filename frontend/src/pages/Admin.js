@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import AdminRecipeCard from "../components/AdminRecipeCard";
 import AdminRecipeForm from "../components/AdminRecipeForm";
 
-const Admin = () => {
+const Admin = ({ user, recipes }) => {
   const [adminMode, setAdminMode] = useState("recipe");
+
+  //CLOSE
+  const closeRecipeForm = () => {
+    setAdminMode("recipe");
+  };
+
   return (
     <div className="h-screen w-full bg-[#E8EAE6]">
-      <div className="container h-full px-4 py-4 mx-auto space-y-10 md:px-0">
+      <div className="container h-full px-4 py-4 mx-auto space-y-6 lg:space-y-8 md:px-0">
         <div className="flex justify-end">
           {adminMode === "recipe" ? (
             <button
@@ -24,7 +30,16 @@ const Admin = () => {
             </button>
           )}
         </div>
-        {adminMode === "recipe" ? <AdminRecipeCard /> : <AdminRecipeForm />}
+        {adminMode === "recipe" ? (
+          <div className="grid gap-2">
+            {recipes &&
+              recipes.map((recipe, index) => (
+                <AdminRecipeCard recipe={recipe} key={index} user={user} />
+              ))}
+          </div>
+        ) : (
+          <AdminRecipeForm user={user} onClose={closeRecipeForm} />
+        )}
       </div>
     </div>
   );

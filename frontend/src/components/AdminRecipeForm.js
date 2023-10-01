@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+import { useRecipesContext } from "../hooks/useRecipesContext";
 
-const AdminRecipeForm = () => {
+const AdminRecipeForm = ({ user, onClose }) => {
   //MAPPED MENUS
   const mealTypeChoices = ["Breakfast", "Lunch", "Dinner", "Snacks"];
   const proteinTypeChoices = ["Meat", "Chicken", "Beef", "Fish"];
+
+  //FORM VERIFICATIONS
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
+  const { dispatch } = useRecipesContext();
 
   // MEAL DATA
   const [title, setTitle] = useState("");
@@ -32,12 +38,38 @@ const AdminRecipeForm = () => {
   };
 
   //FORM SENDING
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here, you can send the form data (title, mealType, proteinSource, ingredients) to your backend API
-    console.log({ title, mealType, proteinSource, ingredients });
-  };
 
+    //Adding data to the task's creation
+    const recipe = {
+      title,
+      mealType,
+      proteinSource,
+      ingredients,
+      user_id: user._id,
+    };
+    const response = await fetch("/api/recipes", {
+      method: "POST",
+      body: JSON.stringify(recipe),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+      console.log("error");
+      setEmptyFields(json.emptyFields);
+    }
+    if (response.ok) {
+      dispatch({ type: "CREATE_RECIPE", payload: json });
+
+      onClose();
+    }
+  };
   return (
     <div className="w-full p-6 bg-[#CFDAC8] h-content rounded-xl">
       <form className="grid space-y-6" onSubmit={handleSubmit}>
@@ -57,7 +89,7 @@ const AdminRecipeForm = () => {
                 type="button"
                 key={index}
                 onClick={(e) => setMealType(item)}
-                className={`py-1 px-4 rounded-2xl   ${
+                className={`py-1 px-2 lg:px-4 rounded-2xl   ${
                   mealType === item
                     ? "bg-[#7C9473] text-white font-bold"
                     : "border-[#7C9473] border hover:bg-[#7C9473]"
@@ -76,7 +108,7 @@ const AdminRecipeForm = () => {
                 type="button"
                 key={index}
                 onClick={(e) => setProteinSource(item)}
-                className={`py-1 px-4 rounded-2xl   ${
+                className={`py-1 px-2 lg:px-4 rounded-2xl   ${
                   proteinSource === item
                     ? "bg-[#7C9473] text-white font-bold"
                     : "border-[#7C9473] border hover:bg-[#7C9473]"
@@ -92,10 +124,10 @@ const AdminRecipeForm = () => {
           <div className="grid gap-2">
             {ingredients.map((ingredient, index) => (
               <div key={index} className="flex gap-4">
-                <div className="pl-1 p-1 rounded-lg bg-[#CFDAC8] border border-[#7C9473] outline-none w-40">
+                <div className="pl-1 p-1 rounded-lg bg-[#CFDAC8] border border-[#7C9473] outline-none w-28 lg:w-40">
                   {ingredient.title}
                 </div>
-                <div className="pl-1 p-1 rounded-lg bg-[#CFDAC8] border border-[#7C9473] outline-none w-40">
+                <div className="pl-1 p-1 rounded-lg bg-[#CFDAC8] border border-[#7C9473] outline-none w-28 lg:w-40">
                   {ingredient.quantity}
                 </div>
                 <button
@@ -121,7 +153,7 @@ const AdminRecipeForm = () => {
           <div className="flex items-center gap-4">
             <input
               type="text"
-              className="pl-1 p-1 rounded-lg bg-[#CFDAC8] border border-[#7C9473] outline-none w-40"
+              className="pl-1 p-1 rounded-lg bg-[#CFDAC8] border border-[#7C9473] outline-none w-28 lg:w-40"
               placeholder="Title"
               value={newIngredient.title}
               onChange={(e) =>
@@ -131,7 +163,7 @@ const AdminRecipeForm = () => {
             <input
               type="text"
               placeholder="Quantity"
-              className="pl-1 p-1 rounded-lg bg-[#CFDAC8] border border-[#7C9473] outline-none w-40"
+              className="pl-1 p-1 rounded-lg bg-[#CFDAC8] border border-[#7C9473] outline-none w-28 lg:w-40"
               value={newIngredient.quantity}
               onChange={(e) =>
                 setNewIngredient({ ...newIngredient, quantity: e.target.value })
