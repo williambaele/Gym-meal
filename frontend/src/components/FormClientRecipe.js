@@ -51,8 +51,8 @@ const FormClientRecipe = ({ onFormSubmit }) => {
                 key={index}
                 className={`w-32 lg:w-40 p-1 rounded-2xl border   ${
                   userMealType === item
-                    ? "bg-[#FF6F61] text-white"
-                    : "border-[#FF6F61] border"
+                    ? "bg-[#7C9473] text-white"
+                    : "border-[#7C9473] border"
                 }`}
               >
                 {item}
@@ -72,8 +72,8 @@ const FormClientRecipe = ({ onFormSubmit }) => {
                 key={index}
                 className={`w-32 lg:w-40 p-1 rounded-2xl border   ${
                   userProteinSource === item
-                    ? "bg-[#FF6F61] text-white"
-                    : "border-[#FF6F61] border"
+                    ? "bg-[#7C9473] text-white"
+                    : "border-[#7C9473] border"
                 }`}
               >
                 {item}
@@ -93,8 +93,8 @@ const FormClientRecipe = ({ onFormSubmit }) => {
                 key={index}
                 className={`w-32 lg:w-40 p-1 rounded-2xl border   ${
                   userNbMeal === item
-                    ? "bg-[#FF6F61] text-white"
-                    : "border-[#FF6F61] border"
+                    ? "bg-[#7C9473] text-white"
+                    : "border-[#7C9473] border"
                 }`}
               >
                 {item}
@@ -106,9 +106,9 @@ const FormClientRecipe = ({ onFormSubmit }) => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-[#FF6F61] hover:bg-[#FA9884]/90 p-2 px-10 rounded-2xl text-white font-bold"
+              className="bg-[#7C9473] hover:bg-[#FA9884]/90 p-2 px-10 rounded-2xl text-white font-bold"
             >
-              Give me a meal
+              Submit
             </button>
           </div>
           {errorMsg ? (

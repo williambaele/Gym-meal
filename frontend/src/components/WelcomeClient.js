@@ -13,7 +13,7 @@ const WelcomeClient = ({ openForm }) => {
       <div className="flex justify-center">
         <button
           onClick={openForm}
-          className="bg-[#FA9884] hover:bg-[#FA9884]/90 p-2 px-10 rounded-2xl text-white font-bold"
+          className="bg-[#7C9473] hover:bg-[#7C9473]/90 p-2 px-10 rounded-2xl text-white font-bold"
         >
           Give me a meal
         </button>
