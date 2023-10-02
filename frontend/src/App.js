@@ -6,6 +6,7 @@ import Admin from "./pages/Admin";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect } from "react";
 import { useRecipesContext } from "./hooks/useRecipesContext";
+import API from "./services/HttpCommon";
 
 function App() {
   const { user } = useAuthContext();
@@ -14,11 +15,10 @@ function App() {
   //ALL RECIPES
   useEffect(() => {
     const fetchRecipes = async () => {
-      const response = await fetch("/api/recipes");
-      const json = await response.json();
+      const response = await API.get("/recipes");
 
-      if (response.ok) {
-        recipesDispatch({ type: "SET_RECIPES", payload: json });
+      if (response.data) {
+        recipesDispatch({ type: "SET_RECIPES", payload: response.data });
       }
     };
 

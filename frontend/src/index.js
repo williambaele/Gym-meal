@@ -24,7 +24,7 @@ root.render(
           draggable
           pauseOnHover
           theme="light"
-        />{" "}
+        />
       </RecipesContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
