@@ -4,4 +4,4 @@ Gymeal helps people how are lost when they need to change a bit the meals they e
 
 You can set a filter on the protein source you are craving for and ask a specific meals number
 
-[Gymeal](gymeal.xyz)
+[Gymeal](https://gymeal.xyz)
