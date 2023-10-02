@@ -21,6 +21,19 @@ const Home = ({ recipes }) => {
     setShownComponent("recipes");
   };
 
+  // RANDOMIZER FUNCTION
+  const shuffleArray = (array) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  };
+
   // FILTERED RECIPES
   const filteredRecipes = useMemo(() => {
     if (!formData) {
@@ -29,7 +42,7 @@ const Home = ({ recipes }) => {
 
     const { mealType, proteinSource, nbMeal } = formData;
 
-    // Filter recipes based on mealType and proteinSource
+    // FILTER RECIPES BASED ON FILTERS
     let filtered = recipes.filter((recipe) => {
       return (
         (!mealType || recipe.mealType === mealType) &&
@@ -37,14 +50,14 @@ const Home = ({ recipes }) => {
       );
     });
 
-    // Limit the result to the specified number (nbMeal)
+    // RANDOMIZE THE ARRAY
+    filtered = shuffleArray(filtered);
+
+    // GIVE WANTED NUMBER OF MEALS
     filtered = filtered.slice(0, nbMeal);
 
     return filtered;
   }, [formData, recipes]);
-
-  console.log(filteredRecipes);
-
   return (
     <div className="h-screen w-full bg-[#E8EAE6]">
       <div className="container h-full px-4 mx-auto md:px-0">
