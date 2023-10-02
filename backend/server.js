@@ -8,6 +8,11 @@ const recipeRoutes = require("./routes/recipes");
 // express app
 const app = express();
 
+//CORS
+const cors = require("cors");
+// ...
+app.use(cors());
+
 // middleware
 app.use(express.json());
 
