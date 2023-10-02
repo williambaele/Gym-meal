@@ -12,7 +12,7 @@ const ClientRecipes = ({ recipes, closeForm }) => {
       </div>
       <div className="flex items-center justify-center w-full h-4/6">
         <div className="flex flex-col w-full h-full gap-6 overflow-scroll lg:flex-row lg:justify-center lg:h-max">
-          {recipes.map((recipe, index) => (
+          {recipes?.map((recipe, index) => (
             <ClientRecipeCard recipe={recipe} key={index} />
           ))}
         </div>

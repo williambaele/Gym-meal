@@ -6,6 +6,7 @@ import Admin from "./pages/Admin";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect } from "react";
 import { useRecipesContext } from "./hooks/useRecipesContext";
+import Signup from "./pages/Signup";
 
 function App() {
   const { user } = useAuthContext();
@@ -14,9 +15,10 @@ function App() {
   //ALL RECIPES
   useEffect(() => {
     const fetchRecipes = async () => {
-      const response = await fetch("/api/recipes");
+      const response = await fetch(
+        "https://gymeal-server.onrender.com/api/recipes"
+      );
       const json = await response.json();
-
       if (response.ok) {
         recipesDispatch({ type: "SET_RECIPES", payload: json });
       }
@@ -28,6 +30,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/signup" element={<Signup />} />
+
           <Route path="/" element={<Home recipes={recipes} />} />
           <Route
             path="/admin"

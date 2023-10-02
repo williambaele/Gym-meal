@@ -23,15 +23,17 @@ const Home = ({ recipes }) => {
 
   // RANDOMIZER FUNCTION
   const shuffleArray = (array) => {
-    const shuffledArray = [...array];
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ];
+    if (Array.isArray(array)) {
+      const shuffledArray = [...array];
+      for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [
+          shuffledArray[j],
+          shuffledArray[i],
+        ];
+      }
+      return shuffledArray;
     }
-    return shuffledArray;
   };
 
   // FILTERED RECIPES
@@ -43,7 +45,7 @@ const Home = ({ recipes }) => {
     const { mealType, proteinSource, nbMeal } = formData;
 
     // FILTER RECIPES BASED ON FILTERS
-    let filtered = recipes.filter((recipe) => {
+    let filtered = recipes?.filter((recipe) => {
       return (
         (!mealType || recipe.mealType === mealType) &&
         (!proteinSource || recipe.proteinSource === proteinSource)
@@ -54,7 +56,7 @@ const Home = ({ recipes }) => {
     filtered = shuffleArray(filtered);
 
     // GIVE WANTED NUMBER OF MEALS
-    filtered = filtered.slice(0, nbMeal);
+    filtered = filtered?.slice(0, nbMeal);
 
     return filtered;
   }, [formData, recipes]);
