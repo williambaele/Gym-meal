@@ -8,7 +8,7 @@ const ClientRecipeCard = ({ recipe }) => {
 
   return (
     <motion.div animate={{ x: 0, scale: 1 }} initial={{ scale: 0, x: -100 }}>
-      <div className="w-full p-6 bg-[#CFDAC8] shadow-sm lg:w-80 rounded-2xl space-y-4 lg:space-y-6">
+      <div className="w-full p-6 bg-[#CFDAC8] shadow-sm lg:w-80 rounded-2xl space-y-4 lg:space-y-6 h-full">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold">{recipe.title}</h2>
           <svg

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const FormClientRecipe = ({ onFormSubmit }) => {
   //FORM DATA
-  const mealType = ["Breakfast", "Lunch", "Dinner"];
   const proteinSource = ["Chicken", "Beef", "Fish"];
   const nbMeal = ["1", "2", "3"];
   const [isLoading, setIsLoading] = useState(false);
@@ -10,7 +9,6 @@ const FormClientRecipe = ({ onFormSubmit }) => {
   const [errorMsg, setErrorMsg] = useState(false);
 
   //USER CHOICES
-  const [userMealType, setUserMealType] = useState("");
   const [userProteinSource, setUserProteinSource] = useState("");
   const [userNbMeal, setUserNbMeal] = useState("");
 
@@ -18,7 +16,7 @@ const FormClientRecipe = ({ onFormSubmit }) => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    if (!userMealType || !userProteinSource || !userNbMeal) {
+    if (!userProteinSource || !userNbMeal) {
       setErrorMsg(true);
     } else {
       setIsLoading(true);
@@ -28,7 +26,6 @@ const FormClientRecipe = ({ onFormSubmit }) => {
         setIsLoading(false);
         setErrorMsg(false);
         const formData = {
-          mealType: userMealType,
           proteinSource: userProteinSource,
           nbMeal: userNbMeal,
         };
@@ -42,73 +39,36 @@ const FormClientRecipe = ({ onFormSubmit }) => {
         Let's filter your choice
       </h1>
       <form
-        className="grid items-center justify-center py-10 mx-auto space-y-6 lg:space-y-12"
+        className="grid items-center justify-center grid-cols-2 gap-4 py-10 mx-auto"
         onSubmit={handleSearch}
       >
-        <div className="flex justify-center space-y-4 ">
-          <div className="grid grid-cols-3 gap-4">
-            {mealType.map((item, index) => (
-              <button
-                onClick={() => {
-                  setUserMealType(item);
-                  setErrorMsg(false);
-                }}
-                type="button"
-                key={index}
-                className={`w-32 lg:w-40 p-1 rounded-2xl border   ${
-                  userMealType === item
-                    ? "bg-[#7C9473] text-white"
-                    : "border-[#7C9473] border"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex justify-center space-y-4 ">
-          <div className="grid grid-cols-3 gap-4">
-            {proteinSource.map((item, index) => (
-              <button
-                onClick={() => {
-                  setUserProteinSource(item);
-                  setErrorMsg(false);
-                }}
-                type="button"
-                key={index}
-                className={`w-32 lg:w-40 p-1 rounded-2xl border   ${
-                  userProteinSource === item
-                    ? "bg-[#7C9473] text-white"
-                    : "border-[#7C9473] border"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex justify-center space-y-4 ">
-          <div className="grid grid-cols-3 gap-4">
-            {nbMeal.map((item, index) => (
-              <button
-                type="button"
-                onClick={() => {
-                  setUserNbMeal(item);
-                  setErrorMsg(false);
-                }}
-                key={index}
-                className={`w-32 lg:w-40 p-1 rounded-2xl border   ${
-                  userNbMeal === item
-                    ? "bg-[#7C9473] text-white"
-                    : "border-[#7C9473] border"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-col justify-center space-y-4">
+        {/* NEW FORM*/}
+        <select
+          onChange={(e) => {
+            setUserProteinSource(e.target.value);
+            setErrorMsg(false);
+          }}
+          className={`w-48 lg:w-60 p-1 rounded-2xl border  border-[#7C9473] bg-[#E8EAE6]`}
+        >
+          <option>Protein source</option>
+          {proteinSource.map((item, index) => (
+            <option key={index}>{item}</option>
+          ))}
+        </select>
+        <select
+          onChange={(e) => {
+            setUserNbMeal(e.target.value);
+            setErrorMsg(false);
+          }}
+          className={`w-48 lg:w-60 p-1 rounded-2xl border  border-[#7C9473] bg-[#E8EAE6]`}
+        >
+          <option>Meals number</option>
+          {nbMeal.map((item, index) => (
+            <option key={index}>{item}</option>
+          ))}
+        </select>
+
+        <div className="flex flex-col justify-center col-span-2 pt-10 space-y-4">
           <div className="flex justify-center">
             <button
               type="submit"
@@ -137,7 +97,7 @@ const FormClientRecipe = ({ onFormSubmit }) => {
             </button>
           </div>
           {errorMsg ? (
-            <p className="text-center">Please select all fields</p>
+            <p className="text-center text-red-700">Please select all fields</p>
           ) : null}
         </div>
       </form>

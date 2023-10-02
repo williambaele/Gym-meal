@@ -5,7 +5,7 @@ const ClientRecipes = ({ recipes, closeForm }) => {
   console.log(recipes);
   return (
     <div className="flex flex-col items-center justify-center w-full h-full space-y-6 ">
-      <div className="flex items-center h-1/6">
+      <div className="flex flex-col items-center justify-center h-1/6">
         <h1 className="text-4xl text-center md:text-5xl">
           Enjoy your meals 😋
         </h1>
