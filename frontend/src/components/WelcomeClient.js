@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { render } from "react-dom";
 const WelcomeClient = ({ openForm }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full space-y-6">

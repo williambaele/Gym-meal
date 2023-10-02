@@ -22,8 +22,8 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use("https://gymeal-server.onrender.com/api/recipes", recipeRoutes);
-app.use("https://gymeal-server.onrender.com/api/user", userRoutes);
+app.use("/api/recipes", recipeRoutes);
+app.use("/api/user", userRoutes);
 
 // connect to db
 mongoose

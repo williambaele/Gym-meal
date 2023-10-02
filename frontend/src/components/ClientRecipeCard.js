@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 
 const ClientRecipeCard = ({ recipe }) => {
-  console.log(recipe);
   const [copiedText, copyToClipboard] = useCopyToClipboard();
 
   return (
