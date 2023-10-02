@@ -1,5 +1,6 @@
 import React from "react";
-
+import { motion } from "framer-motion";
+import { render } from "react-dom";
 const WelcomeClient = ({ openForm }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full space-y-6">
@@ -11,12 +12,17 @@ const WelcomeClient = ({ openForm }) => {
         healty meals.
       </p>
       <div className="flex justify-center">
-        <button
-          onClick={openForm}
-          className="bg-[#7C9473] hover:bg-[#7C9473]/90 p-2 px-10 rounded-2xl text-white font-bold"
+        <motion.div
+          animate={{ x: 0, scale: 1 }}
+          initial={{ scale: 0, x: -100 }}
         >
-          Give me a meal
-        </button>
+          <button
+            onClick={openForm}
+            className="bg-[#7C9473] hover:bg-[#7C9473]/90 p-2 px-10 rounded-2xl text-white font-bold"
+          >
+            Give me a meal
+          </button>
+        </motion.div>
       </div>
     </div>
   );
