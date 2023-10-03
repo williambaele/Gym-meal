@@ -7,7 +7,7 @@ const WelcomeClient = ({ openForm }) => {
         Stop always eating the same boring meals
       </h1>
       <p className="text-lg text-center md:text-xl">
-        Gymeal help you to variate your protein source and keep enjoying eating
+        Gymeal helps you to vary your protein source and keep enjoying eating
         healty meals.
       </p>
       <div className="flex justify-center">

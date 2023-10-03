@@ -21,7 +21,7 @@ const FormClientRecipe = ({ onFormSubmit }) => {
     } else {
       setIsLoading(true);
 
-      // Simulating a delay with setTimeout
+      //IS LOADING EFFECT
       setTimeout(() => {
         setIsLoading(false);
         setErrorMsg(false);
@@ -48,7 +48,7 @@ const FormClientRecipe = ({ onFormSubmit }) => {
             setUserProteinSource(e.target.value);
             setErrorMsg(false);
           }}
-          className={`w-48 lg:w-60 p-1 rounded-2xl border  border-[#7C9473] bg-[#E8EAE6]`}
+          className={`w-40 lg:w-60 p-1 rounded-2xl border  border-[#7C9473] bg-[#E8EAE6]`}
         >
           <option>Protein source</option>
           {proteinSource.map((item, index) => (
@@ -60,7 +60,7 @@ const FormClientRecipe = ({ onFormSubmit }) => {
             setUserNbMeal(e.target.value);
             setErrorMsg(false);
           }}
-          className={`w-48 lg:w-60 p-1 rounded-2xl border  border-[#7C9473] bg-[#E8EAE6]`}
+          className={`w-40 lg:w-60 p-1 rounded-2xl border  border-[#7C9473] bg-[#E8EAE6]`}
         >
           <option>Meals number</option>
           {nbMeal.map((item, index) => (

@@ -42,14 +42,11 @@ const Home = ({ recipes }) => {
       return recipes;
     }
 
-    const { mealType, proteinSource, nbMeal } = formData;
+    const { proteinSource, nbMeal } = formData;
 
     // FILTER RECIPES BASED ON FILTERS
     let filtered = recipes?.filter((recipe) => {
-      return (
-        (!mealType || recipe.mealType === mealType) &&
-        (!proteinSource || recipe.proteinSource === proteinSource)
-      );
+      return !proteinSource || recipe.proteinSource === proteinSource;
     });
 
     // RANDOMIZE THE ARRAY
